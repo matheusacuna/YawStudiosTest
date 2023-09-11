@@ -73,6 +73,7 @@ namespace Managers
             {
                 InstantiateCards(deckCardPlayer, prefabCardDeck, containerCardsDeck, buttonCardDeckSelected);
                 board.gameObject.SetActive(false);
+                GameManager.ACT_CanStartGame(true);
             }
         }
     }

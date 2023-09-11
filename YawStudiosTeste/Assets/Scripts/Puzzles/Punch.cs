@@ -1,10 +1,9 @@
 using UnityEngine;
 
-public class Punch : MonoBehaviour, IPuzzle
+public class Punch : MonoBehaviour
 {
-    public void SolvePuzzle()
+    public void DestroyEnemy()
     {
-        Debug.Log("Destruiu o inimigo");
         Destroy(gameObject);
     }
 
