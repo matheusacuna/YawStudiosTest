@@ -18,8 +18,9 @@ namespace Managers
         [Header("Cards Deck Settings")]
         public Transform containerCardsDeck;
         public GameObject prefabCardDeck;
+        public Button buttonCardDeckSelected;
 
-        [Header("Card Seletected")]
+        [Header("Card Inventory Seletected")]
         public Card cardSelectedSO;
         public GameObject cardSelectedObj;
 
@@ -27,40 +28,32 @@ namespace Managers
 
         private void Start()
         {
-            InstantiateInventoryCards();
+            board.SetActive(true);
+            InstantiateCards(cardsToSelect, cardPrefab, containerCard, buttonSelectCard);
         }
 
-        private void InstantiateInventoryCards()
+        public void InstantiateCards(List<Card> cardList, GameObject cardPrefab, Transform containerCards, Button button)
         {
-            for (int i = 0; i < cardsToSelect.Count; i++) 
+            for (int i = 0; i < cardList.Count; i++)
             {
-                GameObject prefabCard = Instantiate(cardPrefab,containerCard);
-                prefabCard.GetComponent<SetupCard>().card = cardsToSelect[i];
-                prefabCard.GetComponent<Button>().onClick.AddListener(() => SelectedCard(prefabCard));
+                GameObject obj = Instantiate(cardPrefab, containerCards);
+                obj.GetComponent<SetupCard>().card = cardList[i];
+                obj.GetComponent<Button>().onClick.AddListener(() => SelectedCard(obj, containerCards, button));
             }
         }
 
-        public void InstantiateCardsDeck()
-        {
-            for (int i = 0; i < deckCardPlayer.Count; i++)
-            {
-                GameObject deckCardPrefab = Instantiate(prefabCardDeck, containerCardsDeck);
-                deckCardPrefab.GetComponent<SetupCard>().card = deckCardPlayer[i];
-            }
-        }
-
-        private void SelectedCard(GameObject obj)
+        private void SelectedCard(GameObject obj, Transform container, Button button)
         {
             cardSelectedSO = obj.GetComponent<SetupCard>().card;
             cardSelectedObj = obj;
 
-            for (int i = 0; i < containerCard.childCount; i++)
+            for (int i = 0; i < container.childCount; i++)
             {
-                containerCard.GetChild(i).GetChild(0).gameObject.SetActive(false);
+                container.GetChild(i).GetChild(0).gameObject.SetActive(false);
             }
 
             obj.transform.GetChild(0).gameObject.SetActive(true);
-            buttonSelectCard.gameObject.SetActive(true);
+            button.gameObject.SetActive(true);
 
         }
 
@@ -78,7 +71,7 @@ namespace Managers
 
             if (countCardsChosen == 3)
             {
-                InstantiateCardsDeck();
+                InstantiateCards(deckCardPlayer, prefabCardDeck, containerCardsDeck, buttonCardDeckSelected);
                 board.gameObject.SetActive(false);
             }
         }
