@@ -9,24 +9,29 @@ public class ChooseCard : MonoBehaviour
     [SerializeField] private Animator anim;
     [SerializeField] private Button button;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
         button.onClick.RemoveAllListeners();
 
-        IPuzzle puzzle = collision.GetComponent<IPuzzle>();
+        IPuzzle puzzle = collision.gameObject.GetComponent<IPuzzle>();
 
-        if(collision.gameObject.CompareTag("Puzzle"))
+        if (collision.gameObject.CompareTag("Puzzle"))
         {
             anim.Play("OpenDeckPlayer");
 
             if (puzzle != null)
             {
-                button.onClick.AddListener(() => VerifyIdCards(collision.gameObject.GetComponent<Puzzle>().idPuzzle, puzzle));
+                UnityAction action = () =>
+                {
+                    VerifyIdCards(collision.gameObject.GetComponent<Puzzle>().idPuzzle, puzzle);
+                    cardsInventoryManager.DecrementCardCount(cardsInventoryManager.cardSelectedObj);
+                };
+                button.onClick.AddListener(action);
             }
         }
     }
 
-    private void OnTriggerExit2D(Collider2D collision)
+    private void OnCollisionExit2D(Collision2D collision)
     {
         if (collision.gameObject.CompareTag("Puzzle"))
         {
@@ -38,8 +43,16 @@ public class ChooseCard : MonoBehaviour
     {
         if(cardsInventoryManager.cardSelectedSO.id == id)
         {
-            Ipuzzle.SolvePuzzle();
-            anim.Play("CloseDeckPlayer");
+            if(cardsInventoryManager.cardSelectedSO.cardCount > 0)
+            {
+                Ipuzzle.SolvePuzzle();
+                anim.Play("CloseDeckPlayer");
+            }
+            else
+            {
+                anim.Play("CloseDeckPlayer");
+                Debug.Log("vc n pode mais usar esta carta");
+            }
             
         }
         else

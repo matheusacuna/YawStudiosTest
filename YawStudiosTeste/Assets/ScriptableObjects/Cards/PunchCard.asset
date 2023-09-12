@@ -16,3 +16,4 @@ MonoBehaviour:
   nameCard: Punch
   descriptionCard: Hit an enemy
   id: 1
+  cardCount: 1

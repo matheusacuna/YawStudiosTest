@@ -1,12 +1,17 @@
 using System;
+using TMPro;
 using UnityEngine;
 
 namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
+        [Header("Script Reference")]
+        public StarsManager starsManager;
+
         [Header("Win Game Settings")]
         public GameObject modalWinGame;
+        public TextMeshProUGUI numberStars;
 
         [Header("Lose Game Settings")]
         public GameObject modalLoseGame;
@@ -53,6 +58,7 @@ namespace Managers
         public void WinGame()
         {
             modalWinGame.SetActive(true);
+            numberStars.text = starsManager.starsCount.ToString(); 
             Time.timeScale = 0f;
         }
 

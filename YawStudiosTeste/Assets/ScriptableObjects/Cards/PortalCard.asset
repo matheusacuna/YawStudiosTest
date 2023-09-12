@@ -16,3 +16,4 @@ MonoBehaviour:
   nameCard: Portal
   descriptionCard: Teleports the character
   id: 2
+  cardCount: 0

@@ -16,3 +16,4 @@ MonoBehaviour:
   nameCard: Jump
   descriptionCard: Jump platfform
   id: 3
+  cardCount: 0

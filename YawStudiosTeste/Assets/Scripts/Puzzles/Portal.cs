@@ -7,9 +7,9 @@ public class Portal : MonoBehaviour
     [SerializeField] private Transform targetPortal;
     [SerializeField] private Transform playerTransform;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void OnCollisionEnter2D(Collision2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if (collision.gameObject.CompareTag("Player"))
         {
             playerTransform = collision.gameObject.transform;
         }
