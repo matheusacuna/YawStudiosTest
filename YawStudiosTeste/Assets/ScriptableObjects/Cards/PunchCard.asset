@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8a2658ab24e8942bf947a6f1af4c62, type: 3}
   m_Name: PunchCard
   m_EditorClassIdentifier: 
-  iconSprite: {fileID: 0}
+  iconSprite: {fileID: 21300000, guid: 6fe5eac25e65c9440b33d3bb65b9aa10, type: 3}
   nameCard: Punch
   descriptionCard: Hit an enemy
   id: 1

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bf8a2658ab24e8942bf947a6f1af4c62, type: 3}
   m_Name: PortalCard
   m_EditorClassIdentifier: 
-  iconSprite: {fileID: 0}
+  iconSprite: {fileID: 21300000, guid: db9faa868ec69c74f8a6bcec293987ab, type: 3}
   nameCard: Portal
   descriptionCard: Teleports the character
   id: 2

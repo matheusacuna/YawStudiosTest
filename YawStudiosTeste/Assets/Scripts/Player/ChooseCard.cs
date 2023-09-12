@@ -44,7 +44,7 @@ public class ChooseCard : MonoBehaviour
         }
         else
         {
-            Debug.Log("carta errada");
+            HealthManager.ACT_DecrementHealth(1);
         }
 
         

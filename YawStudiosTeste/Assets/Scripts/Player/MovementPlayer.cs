@@ -3,12 +3,13 @@ using Managers;
 
 public class MovementPlayer : MonoBehaviour
 {
-    private Rigidbody2D rig;
     [Header("Scripts Reference")]
     public MyInputsManager myInputsManager;
-
     public float speed;
+
+    
     private Vector2 movement;
+    private Rigidbody2D rig;
 
     // Start is called before the first frame update
     void Start()

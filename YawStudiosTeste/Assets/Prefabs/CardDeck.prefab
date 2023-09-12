@@ -83,6 +83,7 @@ MonoBehaviour:
   backgroundSelected: {fileID: 0}
   nameCard: {fileID: 6813606271737125104}
   descriptionCard: {fileID: 6438983248556953270}
+  iconCard: {fileID: 2160066700770842873}
 --- !u!114 &3046110380297451390
 MonoBehaviour:
   m_ObjectHideFlags: 0

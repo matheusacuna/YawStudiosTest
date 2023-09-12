@@ -9,12 +9,12 @@ public class SetupCard : MonoBehaviour
     public GameObject backgroundSelected;
     public TextMeshProUGUI nameCard;
     public TextMeshProUGUI descriptionCard;
-    //public Image iconCard;
+    public Image iconCard;
 
     void Start()
     {
         nameCard.text = card.nameCard;
         descriptionCard.text = card.descriptionCard;
-        //iconCard.sprite = card.iconSprite;
+        iconCard.sprite = card.iconSprite;
     }
 }
