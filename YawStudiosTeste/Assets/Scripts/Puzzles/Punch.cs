@@ -1,10 +1,13 @@
 using UnityEngine;
 
-public class Punch : MonoBehaviour
+namespace Puzzles
 {
-    public void DestroyEnemy()
+    public class Punch : MonoBehaviour
     {
-        Destroy(gameObject);
-    }
+        public void DestroyEnemy()
+        {
+            Destroy(gameObject);
+        }
 
+    }
 }

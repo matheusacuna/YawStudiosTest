@@ -24,21 +24,17 @@ namespace Managers
             if(instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(instance);
             }
             else
             {
-                DontDestroyOnLoad(instance);
+                Destroy(gameObject);
             }
         }
 
         private void Start()
         {
             Time.timeScale = 1.0f;
-        }
-
-        private void Update()
-        {
-            LoserGame();
         }
 
         private void OnEnable()
@@ -64,11 +60,8 @@ namespace Managers
 
         public void LoserGame()
         {
-            if(HealthManager.instance.healthPoint <= 0)
-            {
-                Time.timeScale = 0f;
-                modalLoseGame.SetActive(true);
-            }
+            Time.timeScale = 0f;
+            modalLoseGame.SetActive(true);
         }
     }
 }

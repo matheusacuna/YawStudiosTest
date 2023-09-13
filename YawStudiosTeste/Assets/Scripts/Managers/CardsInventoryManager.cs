@@ -28,12 +28,6 @@ namespace Managers
 
         public bool emptyCardsInventory;
 
-        private void Start()
-        {
-            board.SetActive(true);
-            InstantiateCardsBoard();
-        }
-
         public void InstantiateCardsBoard()
         {
             for (int i = 0; i < cardsToSelect.Count; i++)
@@ -77,6 +71,14 @@ namespace Managers
 
         public void SendCardToDeck()
         {
+            for (int i = 0; i < containerCard.childCount; i++)
+            {
+                if(containerCard.GetChild(i).GetComponent<SetupCard>().card.cardCount == 0)
+                {
+                    return;
+                }
+            }
+
             if(cardsToSelect.Contains(cardSelectedSO))
             {
                 cardsToSelect.Remove(cardSelectedSO);
@@ -110,6 +112,14 @@ namespace Managers
             }
 
             obj.transform.GetChild(5).GetChild(0).GetComponent<TextMeshProUGUI>().text = obj.GetComponent<SetupCard>().card.cardCount.ToString();
+        }
+
+        public void ResetCountCard()
+        {
+            foreach(Card card in cardsToSelect) 
+            {
+                card.cardCount = 0;
+            }
         }
     }
 }

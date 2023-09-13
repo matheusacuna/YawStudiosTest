@@ -1,23 +1,35 @@
 using System;
 using UnityEngine;
 
-public class StarsManager : MonoBehaviour
+namespace Managers
 {
-    public static Action ACT_IncrementStar;
-    public int starsCount;
 
-    private void OnEnable()
+    public class StarsManager : MonoBehaviour
     {
-        ACT_IncrementStar += IncrementStar;
-    }
+        public static Action ACT_IncrementStar;
+        public int starsCount;
+        public string levelIdentifier;
 
-    private void OnDisable()
-    {
-        ACT_IncrementStar -= IncrementStar;
-    }
+        private void OnEnable()
+        {
+            ACT_IncrementStar += IncrementStar;
+        }
 
-    public void IncrementStar()
-    {
-        starsCount++;
+        private void OnDisable()
+        {
+            ACT_IncrementStar -= IncrementStar;
+        }
+
+        public void IncrementStar()
+        {
+            starsCount++;
+        }
+
+        public void SaveStars()
+        {
+            PlayerPrefs.SetInt("Stars_" + levelIdentifier, starsCount);
+            PlayerPrefs.Save();
+            Debug.Log("Estrelas salvas para " + levelIdentifier);
+        }
     }
 }

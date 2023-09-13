@@ -1,15 +1,16 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Puzzle : MonoBehaviour, IPuzzle
+namespace Puzzles
 {
-    public int idPuzzle;
-    public UnityEvent eventPuzzle;
-
-    public void SolvePuzzle()
+    public class Puzzle : MonoBehaviour, IPuzzle
     {
-        eventPuzzle.Invoke();
+        public int idPuzzle;
+        public UnityEvent eventPuzzle;
+
+        public void SolvePuzzle()
+        {
+            eventPuzzle.Invoke();
+        }
     }
 }

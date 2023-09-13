@@ -2,64 +2,69 @@ using Managers;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
+using Puzzles;
 
-public class ChooseCard : MonoBehaviour
+namespace Player
 {
-    [SerializeField] private CardsInventoryManager cardsInventoryManager;
-    [SerializeField] private Animator anim;
-    [SerializeField] private Button button;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class ChooseCard : MonoBehaviour
     {
-        button.onClick.RemoveAllListeners();
+        [SerializeField] private CardsInventoryManager cardsInventoryManager;
+        [SerializeField] private Animator anim;
+        [SerializeField] private Button button;
+        [SerializeField] private Animator animHeartBroken;
+        [SerializeField] private Animator animDontHaveCard;
 
-        IPuzzle puzzle = collision.gameObject.GetComponent<IPuzzle>();
-
-        if (collision.gameObject.CompareTag("Puzzle"))
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            anim.Play("OpenDeckPlayer");
+            button.onClick.RemoveAllListeners();
 
-            if (puzzle != null)
+            IPuzzle puzzle = collision.gameObject.GetComponent<IPuzzle>();
+
+            if (collision.gameObject.CompareTag("Puzzle"))
             {
-                UnityAction action = () =>
+                anim.Play("OpenDeckPlayer");
+
+                if (puzzle != null)
                 {
-                    VerifyIdCards(collision.gameObject.GetComponent<Puzzle>().idPuzzle, puzzle);
-                    cardsInventoryManager.DecrementCardCount(cardsInventoryManager.cardSelectedObj);
-                };
-                button.onClick.AddListener(action);
+                    UnityAction action = () =>
+                    {
+                        VerifyIdCards(collision.gameObject.GetComponent<Puzzle>().idPuzzle, puzzle);
+                        cardsInventoryManager.DecrementCardCount(cardsInventoryManager.cardSelectedObj);
+                    };
+                    button.onClick.AddListener(action);
+                }
             }
         }
-    }
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Puzzle"))
+        private void OnCollisionExit2D(Collision2D collision)
         {
-            anim.Play("CloseDeckPlayer");
-        }
-    }
-
-    public void VerifyIdCards(int id, IPuzzle Ipuzzle)
-    {
-        if(cardsInventoryManager.cardSelectedSO.id == id)
-        {
-            if(cardsInventoryManager.cardSelectedSO.cardCount > 0)
+            if (collision.gameObject.CompareTag("Puzzle"))
             {
-                Ipuzzle.SolvePuzzle();
                 anim.Play("CloseDeckPlayer");
+            }
+        }
+
+        public void VerifyIdCards(int id, IPuzzle Ipuzzle)
+        {
+            if(cardsInventoryManager.cardSelectedSO.id == id)
+            {
+                if(cardsInventoryManager.cardSelectedSO.cardCount > 0)
+                {
+                    Ipuzzle.SolvePuzzle();
+                    anim.Play("CloseDeckPlayer");
+                }
+                else
+                {
+                    anim.Play("CloseDeckPlayer");
+                    animDontHaveCard.Play("donthavecardsFeedback");
+                }
+            
             }
             else
             {
-                anim.Play("CloseDeckPlayer");
-                Debug.Log("vc n pode mais usar esta carta");
-            }
-            
+                HealthManager.ACT_DecrementHealth(1);
+                animHeartBroken.Play("errorFeedback");
+            }    
         }
-        else
-        {
-            HealthManager.ACT_DecrementHealth(1);
-        }
-
-        
     }
 }

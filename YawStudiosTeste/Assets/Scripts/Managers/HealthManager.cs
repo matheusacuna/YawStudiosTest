@@ -21,10 +21,12 @@ namespace Managers
             if (instance == null)
             {
                 instance = this;
+                DontDestroyOnLoad(instance);
             }
             else
             {
-                DontDestroyOnLoad(instance);
+                Destroy(gameObject);
+                
             }
         }
 
@@ -43,6 +45,11 @@ namespace Managers
         private void Start()
         {
             InstantiateHealthIcons();
+        }
+
+        private void Update()
+        {
+            Die();
         }
 
         private void InstantiateHealthIcons()
@@ -83,6 +90,14 @@ namespace Managers
                 {                   
                     healthIcons[i].SetActive(false);
                 }
+            }
+        }
+
+        private void Die()
+        {
+            if (healthPoint <= 0)
+            {
+                GameManager.instance.LoserGame();
             }
         }
     }

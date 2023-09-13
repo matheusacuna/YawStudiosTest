@@ -1,24 +1,24 @@
-using Unity.VisualScripting;
 using UnityEngine;
 
-public class Portal : MonoBehaviour
+namespace Puzzles
 {
-    [Header("Portal Settings")]
-    [SerializeField] private Transform targetPortal;
-    [SerializeField] private Transform playerTransform;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class Portal : MonoBehaviour
     {
-        if (collision.gameObject.CompareTag("Player"))
+        [Header("Portal Settings")]
+        [SerializeField] private Transform targetPortal;
+        [SerializeField] private Transform playerTransform;
+
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            playerTransform = collision.gameObject.transform;
+            if (collision.gameObject.CompareTag("Player"))
+            {
+                playerTransform = collision.gameObject.transform;
+            }
+        }
+
+        public void GetPlayerTransform()
+        {
+            playerTransform.position = targetPortal.position;
         }
     }
-
-    public void GetPlayerTransform()
-    {
-        playerTransform.position = targetPortal.position;
-    }
-
-
 }
