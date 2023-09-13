@@ -21,10 +21,9 @@ namespace Managers
         public static GameManager instance;
         private void Awake()
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = this;
-                DontDestroyOnLoad(instance);
             }
             else
             {

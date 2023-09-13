@@ -9,5 +9,10 @@ namespace Managers
         {
             SceneManager.LoadScene(sceneName);
         }
+
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
     }
 }

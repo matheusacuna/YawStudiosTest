@@ -30,5 +30,11 @@ namespace Managers
                 obj.GetComponent<StarsDisplayManager>().levelIdentifier = $"{levelIndex}";
             }
         }
+
+        public void ResetAllPlayerPrefsData()
+        {
+            PlayerPrefs.DeleteAll();
+            PlayerPrefs.Save();
+        }
     }
 }
